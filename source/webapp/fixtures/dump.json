@@ -1,0 +1,64 @@
+[
+{
+  "model": "webapp.article",
+  "pk": 2,
+  "fields": {
+    "title": "╠шЁ ёэрЁєцш",
+    "text": "╟руЁєчш ьхэ ...",
+    "author": "╠юэшър",
+    "created_at": "2024-02-20T20:31:50.998Z",
+    "updated_at": "2024-02-20T20:31:50.998Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 3,
+  "fields": {
+    "title": "├Ё╕ч√ ш ъю°ьрЁ√",
+    "text": "╞шчэ№ с√ыр ёхЁр ш ёъєўэр, ш тфЁєу тё╕ юсхЁэєыюё№ х∙╕ їєцх т юфэє эюў№...",
+    "author": "Simon from \"Cry of fear\"",
+    "created_at": "2024-02-20T20:37:19.268Z",
+    "updated_at": "2024-02-20T20:37:19.268Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 4,
+  "fields": {
+    "title": "┬ яюшёърї ьхўЄ√",
+    "text": "╞шчэ№ яюыэр чрурфюъ ш ЁрфюёЄш, ъюЄюЁє■ ьэх яЁхфёЄюшЄ Ёх°шЄ№ ш эрщЄш.",
+    "author": "┴хъэрчрЁ",
+    "created_at": "2024-02-20T20:39:24.243Z",
+    "updated_at": "2024-02-20T20:39:24.243Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 5,
+  "fields": {
+    "title": "╦■сют№ чр ¤ъЁрэюь",
+    "text": "▀ ьхўЄры яюярёЄ№ т х╕ ьшЁ, ўЄюс√ ёсышчшЄ№ё  ё эхщ, яюър юэр ьхўЄрыр яюярёЄ№ т ьющ ьшЁ, ўЄюс√ ёсышчшЄ№ё  ёю ьэющ",
+    "author": "┴хъэрчрЁ",
+    "created_at": "2024-02-20T20:41:46.735Z",
+    "updated_at": "2024-02-20T20:41:46.735Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$80hooJhD8loYT8f0Nd9Ju6$GU/doGGQZ8o4rVCCoDgsArbLdWYcRpQzO+MSjewoypw=",
+    "last_login": "2024-02-20T20:45:55.990Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-02-20T20:44:05.611Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
