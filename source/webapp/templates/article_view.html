@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
         <title>View</title>
     </head>
     <body>
-        <h1>Future article:</h1>
-        <h2>{{ title }}</h2>
-        <p>{{ content }}</p>
-        <p>By: {{ author }}</p>
+        <p><a href="/">На главную</a></p>
+        <h1>Статья: </h1>
+        <h2><strong>{{ article.title }}</strong></h2>
+        <p>{{ article.text }}</p>
+        <p>By: <em>{{ article.author }}</em></p>
     </body>
 </html>
