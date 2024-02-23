@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Article, STATUS_CHOICES
-from django.http import HttpResponseRedirect, HttpResponseNotAllowed
+from django.http import HttpResponseRedirect, HttpResponseNotAllowed, Http404
 
 
 def index_view(request):
@@ -27,5 +27,8 @@ def article_create_view(request):
 
 
 def article_view(request, pk):
-    article = Article.objects.get(pk=pk)
+    try:
+        article = Article.objects.get(pk=pk)
+    except Article.DoesNotExist:
+        raise Http404
     return render(request, 'article_view.html', context={'article': article})
