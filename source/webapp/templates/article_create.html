@@ -5,18 +5,26 @@
         <title>Create</title>
     </head>
     <body>
-        <h1>Create Article</h1>
+        <h1>Создание статьи</h1>
         <p><a href="/">На главную</a></p>
         <form action="/articles/add/" method="post">
             {% csrf_token %}
-            <label>Title:</label><br/>
+            <label>Заголовок:</label><br/>
             <input type="text" name="title"/><br/>
 
-            <label>Text:</label><br/>
+            <label>Текст:</label><br/>
             <textarea name="text"></textarea><br/>
 
-            <label>Author:</label><br/>
+            <label>Автор:</label><br/>
             <input type="text" name="author"/><br/>
+
+            <label for="id-status">Статус:</label><br>
+            <select name="status" id="id-status">
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select><br>
+
             <br/>
             <input type="submit" value="Send"/>
         </form>
