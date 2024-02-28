@@ -11,12 +11,12 @@ def index_view(request):
         data = Article.objects.all()
     else:
         data = Article.objects.filter(status='moderated')
-    return render(request, 'index.html', context={'articles': data})
+    return render(request, 'article/index.html', context={'articles': data})
 
 
 def article_create_view(request):
     if request.method == "GET":
-        return render(request, 'article_create.html', context={'status_choices': STATUS_CHOICES})
+        return render(request, 'article/article_create.html', context={'status_choices': STATUS_CHOICES})
     elif request.method == 'POST':
         title = request.POST.get('title')
         text = request.POST.get('text')
@@ -31,4 +31,4 @@ def article_create_view(request):
 
 def article_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article_view.html', context={'article': article})
+    return render(request, 'article/article_view.html', context={'article': article})

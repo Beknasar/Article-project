@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Просмотр{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'webapp:article_create' %}">Создать статью</a></li>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2><strong>{{ article.title }}</strong></h2>
+        <p>{{ article.text }}</p>
+        <p>By: <em>{{ article.author }} | {{ article.created_at }}</em></p>
+    </div>
+{% endblock %}
