@@ -1,32 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
         <title>Create</title>
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
     </head>
     <body>
-        <h1>Создание статьи</h1>
-        <p><a href="{% url 'webapp:index' %}">На главную</a></p>
-        <form action="{% url 'webapp:article_create' %}" method="post">
-            {% csrf_token %}
-            <label>Заголовок:</label><br/>
-            <input type="text" name="title"/><br/>
+        <nav class="navbar">
+            <div class="container">
+                <ul class="menu">
+                    <li><a href="{% url 'webapp:index' %}">На главную</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h1>Создание статьи</h1>
+            <form action="{% url 'webapp:article_create' %}" method="post">
+                {% csrf_token %}
+                <label>Заголовок:</label><br/>
+                <input type="text" name="title"/><br/>
 
-            <label>Текст:</label><br/>
-            <textarea name="text"></textarea><br/>
+                <label>Текст:</label><br/>
+                <textarea name="text"></textarea><br/>
 
-            <label>Автор:</label><br/>
-            <input type="text" name="author"/><br/>
+                <label>Автор:</label><br/>
+                <input type="text" name="author"/><br/>
 
-            <label for="id-status">Статус:</label><br>
-            <select name="status" id="id-status">
-                {% for value, label in status_choices %}
-                    <option value="{{ value }}">{{ label }}</option>
-                {% endfor %}
-            </select><br>
+                <label for="id-status">Статус:</label><br>
+                <select name="status" id="id-status">
+                    {% for value, label in status_choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select><br>
 
-            <br/>
-            <input type="submit" value="Send"/>
-        </form>
+                <br/>
+                <input type="submit" value="Send"/>
+            </form>
+        </div>
     </body>
 </html>

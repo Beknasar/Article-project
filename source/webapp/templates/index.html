@@ -11,9 +11,15 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
+        <nav class="navbar">
+            <div class="container">
+                <ul class="menu">
+                    <li><a href="{% url 'webapp:article_create' %}">Создать статью</a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="container">
             <h1>Статьи: </h1>
-            <p><a href="{% url "webapp:article_create" %}">Добавить</a></p>
             {% for article in articles %}
                 <h2>{{ article.title }}</h2>
                 <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
