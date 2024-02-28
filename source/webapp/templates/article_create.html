@@ -6,8 +6,8 @@
     </head>
     <body>
         <h1>Создание статьи</h1>
-        <p><a href="/">На главную</a></p>
-        <form action="/articles/add/" method="post">
+        <p><a href="{% url 'webapp:index' %}">На главную</a></p>
+        <form action="{% url 'webapp:article_create' %}" method="post">
             {% csrf_token %}
             <label>Заголовок:</label><br/>
             <input type="text" name="title"/><br/>

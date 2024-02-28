@@ -5,7 +5,7 @@
         <title>View</title>
     </head>
     <body>
-        <p><a href="/">На главную</a></p>
+        <p><a href="{% url "webapp:index" %}">На главную</a></p>
         <h1>Статья: </h1>
         <h2><strong>{{ article.title }}</strong></h2>
         <p>{{ article.text }}</p>
