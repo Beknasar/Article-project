@@ -37,10 +37,24 @@ def article_update_view(request, pk):
             'status_choices': STATUS_CHOICES,
         })
     elif request.method == 'POST':
+        errors = {}
         article.title = request.POST.get('title')
+        if not article.title:
+            errors['title'] = 'This field is required'
         article.text = request.POST.get('text')
+        if not article.text:
+            errors['text'] = 'This field is required'
         article.author = request.POST.get('author')
+        if not article.author:
+            errors['author'] = 'This field is required'
         article.status = request.POST.get('status')
+        if errors:
+            return render(request, 'article/article_update.html', context={
+                'status_choices': STATUS_CHOICES,
+                'article': article,
+                'errors': errors
+            })
+        article.save()
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
