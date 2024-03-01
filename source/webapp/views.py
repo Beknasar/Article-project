@@ -72,3 +72,5 @@ def article_delete_view(request, pk):
     elif request.method == "POST":
         article.delete()
         return redirect('webapp:index')
+    else:
+        return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
