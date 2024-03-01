@@ -8,15 +8,6 @@
 
 {% block content %}
     <h1>Обновить статью</h1>
-
-    <form action="{% url "webapp:article_update" article.pk %}" method="post">
-        {% csrf_token %}
-
-        {% for field in form %}
-            {% include 'partial/form_field.html' %}
-        {% endfor %}
-
-        <br/>
-        <input type="submit" value="Send"/>
-    </form>
+    {% url "webapp:article_update" pk=article.pk as action_url %}
+    {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Обновить' %}
 {% endblock %}
