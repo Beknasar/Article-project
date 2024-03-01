@@ -10,6 +10,8 @@
             <h2>{{ article.title }}</h2>
             <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
             <p><a href="{% url 'webapp:article_view' article.pk %}">Подробнее...</a></p>
+            <p><a href="{% url 'webapp:article_update' article.pk %}">Редактировать</a></p>
+            <p><a href="{% url 'webapp:article_delete' article.pk %}">Удалить</a></p>
             <hr>
         {% endfor %}
     </div>

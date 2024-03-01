@@ -55,6 +55,7 @@ def article_update_view(request, pk):
                 'errors': errors
             })
         article.save()
+        return redirect('webapp:article_view', pk=article.pk)
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
@@ -62,3 +63,12 @@ def article_update_view(request, pk):
 def article_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     return render(request, 'article/article_view.html', context={'article': article})
+
+
+def article_delete_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if request.method == "GET":
+        return render(request, 'article/article_delete.html', context={"article": article})
+    elif request.method == "POST":
+        article.delete()
+        return redirect('webapp:index')

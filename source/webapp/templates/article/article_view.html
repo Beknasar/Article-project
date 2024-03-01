@@ -2,6 +2,7 @@
 {% block title %}Просмотр{% endblock %}
 {% block menu %}
     <li><a href="{% url 'webapp:article_update' article.pk %}">Обновить статью</a></li>
+    <li><a href="{% url 'webapp:article_delete' article.pk %}">Удалить статью</a></li>
 {% endblock %}
 {% block content %}
     <div class="container">

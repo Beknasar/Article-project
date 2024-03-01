@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Удалить статью{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'webapp:article_view' article.pk %}">Просмотр</a></li>
+{% endblock %}
+{% block content %}
+    <h1>Вы уверены, что хотите удалить статью "{{ article }}"?</h1>
+    <form method="POST" action="{% url "webapp:article_delete" article.pk %}"
+          class="text-center">
+        {% csrf_token %}
+        <p><input type="submit" value="Confirm"></p>
+        <p><a href="{% url "webapp:article_view" article.pk %}">Отмена</a></p>
+    </form>
+{% endblock %}
