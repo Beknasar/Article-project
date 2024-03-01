@@ -29,6 +29,22 @@ def article_create_view(request):
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
 
+def article_update_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    if request.method == "GET":
+        return render(request, 'article/article_update.html', context={
+            "article": article,
+            'status_choices': STATUS_CHOICES,
+        })
+    elif request.method == 'POST':
+        article.title = request.POST.get('title')
+        article.text = request.POST.get('text')
+        article.author = request.POST.get('author')
+        article.status = request.POST.get('status')
+    else:
+        return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
+
+
 def article_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     return render(request, 'article/article_view.html', context={'article': article})
