@@ -4,22 +4,15 @@
     <h1>Создание статьи</h1>
     <form action="{% url 'webapp:article_create' %}" method="post">
         {% csrf_token %}
-        <label>Заголовок:</label><br/>
-        <input type="text" name="title"/><br/>
-
-        <label>Текст:</label><br/>
-        <textarea name="text"></textarea><br/>
-
-        <label>Автор:</label><br/>
-        <input type="text" name="author"/><br/>
-
-        <label for="id-status">Статус:</label><br>
-        <select name="status" id="id-status">
-            {% for value, label in status_choices %}
-                <option value="{{ value }}">{{ label }}</option>
-            {% endfor %}
-        </select><br>
-
+{#        {% for field in form %}#}
+{#            {% include 'partial/form_field.html' %}#}
+{#        {% endfor %}#}
+{#        {{ form.as_p }}#}
+{#        {{ form.as_table }}#}
+        {% include 'partial/form_field.html' with field=form.title %}
+        {% include 'partial/form_field.html' with field=form.text %}
+        {% include 'partial/form_field.html' with field=form.author %}
+        {% include 'partial/form_field.html' with field=form.status %}
         <br/>
         <input type="submit" value="Send"/>
     </form>

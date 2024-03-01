@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Article, STATUS_CHOICES
-from django.http import HttpResponseRedirect, HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from webapp.forms import ArticleForm
 
 
 def index_view(request):
@@ -16,15 +16,19 @@ def index_view(request):
 
 def article_create_view(request):
     if request.method == "GET":
-        return render(request, 'article/article_create.html', context={'status_choices': STATUS_CHOICES})
+        return render(request, 'article/article_create.html', context={'form': ArticleForm()})
     elif request.method == 'POST':
-        title = request.POST.get('title')
-        text = request.POST.get('text')
-        author = request.POST.get('author')
-        status = request.POST.get('status')
-        article = Article.objects.create(title=title, text=text, author=author, status=status)
-
-        return redirect('webapp:article_view', pk=article.pk)
+        form = ArticleForm(data=request.POST)
+        if form.is_valid():
+            article = Article.objects.create(
+                title=form.cleaned_data['title'],
+                text=form.cleaned_data['text'],
+                author=form.cleaned_data['author'],
+                status=form.cleaned_data['status']
+            )
+            return redirect('webapp:article_view', pk=article.pk)
+        else:
+            return render(request, 'article/article_create.html', context={'form': form})
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
