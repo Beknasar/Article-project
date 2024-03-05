@@ -8,6 +8,16 @@
     <div class="container">
         <h2><strong>{{ article.title }}</strong></h2>
         <p>{{ article.text }}</p>
-        <p>By: <em>{{ article.author }} | {{ article.created_at }}</em></p>
+        <p>От: <em>{{ article.author }} | {{ article.created_at }}</em></p>
+        <p>Время публикации: {{ article.publish_at|date:"d.m.Y H:i:s" }}</p>
+        <h3>Комментарий:</h3>
+        {% for comment in article.comments.all %}
+            <div>
+                <h4>{{ comment.author }} ({{ comment.created_at }})</h4>
+                <div class="pre">{{ comment.text }}</div>
+            </div>
+        {% empty %}
+            <p>Нет комментариев</p>
+        {% endfor %}
     </div>
 {% endblock %}
