@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-APPS = ['webapp',]
+APPS = ['webapp']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
