@@ -36,9 +36,15 @@ class ArticleCreateView(View):
             return render(request, 'article/article_create.html', context={'form': form})
 
 
-def article_update_view(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    if request.method == "GET":
+class ArticleUpdateView(TemplateView):
+    template_name = 'article/article_update.html'
+
+    def get_context_data(self, **kwargs):
+        # Получаем контекст от базового класса
+        context = super().self.get_context_data(**kwargs)
+        # Добавляем свои переменные контекста
+        pk = self.kwargs.get('pk')
+        article = get_object_or_404(Article, pk=pk)
         form = ArticleForm(initial={
             'title': article.title,
             'text': article.text,
@@ -46,11 +52,13 @@ def article_update_view(request, pk):
             'status': article.status,
             'publish_at': make_naive(article.publish_at).strftime(BROWSER_DATETIME_FORMAT)
         })
-        return render(request, 'article/article_update.html', context={
-            'form': form,
-            'article': article,
-        })
-    elif request.method == 'POST':
+        context['form'] = form
+        context['article'] = article
+        return context
+
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        article = get_object_or_404(Article, pk=pk)
         form = ArticleForm(data=request.POST)
         if form.is_valid():
             article.title = form.cleaned_data['title']
@@ -61,12 +69,10 @@ def article_update_view(request, pk):
             article.save()
             return redirect('webapp:article_view', pk=article.pk)
         else:
-            return render(request, 'article/article_update.html', context={
+            return self.render_to_response({
                 'form': form,
                 'article': article,
             })
-    else:
-        return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
 
 class ArticleView(TemplateView):
