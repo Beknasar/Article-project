@@ -1,5 +1,5 @@
 from django import forms
-from .models import STATUS_CHOICES
+from .models import STATUS_CHOICES, Article
 
 
 BROWSER_DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
@@ -16,3 +16,7 @@ class ArticleForm(forms.Form):
                                                     '%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M',
                                                     '%Y-%m-%d %H:%M:%S'],
                                      widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+
+
+class CommentForm(forms.Form):
+    article = forms.ModelChoiceField(queryset=Article.objects)
