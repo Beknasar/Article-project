@@ -37,5 +37,51 @@
     "updated_at": "2024-03-05T08:47:09.038Z",
     "publish_at": "2024-03-05T08:45:17.420Z"
   }
+},
+{
+  "model": "webapp.article",
+  "pk": 5,
+  "fields": {
+    "title": "Title",
+    "text": "Text",
+    "author": "Vasya",
+    "status": "new",
+    "created_at": "2024-03-05T08:50:20.615Z",
+    "updated_at": "2024-03-05T08:50:20.615Z",
+    "publish_at": "2024-03-05T08:50:20.615Z"
+  }
+},
+{
+  "model": "webapp.comment",
+  "pk": 1,
+  "fields": {
+    "article": 5,
+    "text": "Comment 1",
+    "author": "Petya",
+    "created_at": "2024-03-05T08:50:20.693Z",
+    "updated_at": "2024-03-05T08:50:20.693Z"
+  }
+},
+{
+  "model": "webapp.comment",
+  "pk": 2,
+  "fields": {
+    "article": 5,
+    "text": "Comment 2",
+    "author": "Masha",
+    "created_at": "2024-03-05T08:50:20.738Z",
+    "updated_at": "2024-03-05T08:50:20.738Z"
+  }
+},
+{
+  "model": "webapp.comment",
+  "pk": 3,
+  "fields": {
+    "article": 5,
+    "text": "Comment 3",
+    "author": "Kolya",
+    "created_at": "2024-03-05T08:50:44.865Z",
+    "updated_at": "2024-03-05T08:50:44.865Z"
+  }
 }
 ]
