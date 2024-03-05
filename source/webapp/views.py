@@ -17,10 +17,11 @@ class IndexView(View):
         return render(request, 'article/index.html', context={'articles': data})
 
 
-def article_create_view(request):
-    if request.method == "GET":
+class ArticleCreateView(View):
+    def get(self, request):
         return render(request, 'article/article_create.html', context={'form': ArticleForm()})
-    elif request.method == 'POST':
+
+    def post(self, request):
         form = ArticleForm(data=request.POST)
         if form.is_valid():
             article = Article.objects.create(
@@ -33,8 +34,6 @@ def article_create_view(request):
             return redirect('webapp:article_view', pk=article.pk)
         else:
             return render(request, 'article/article_create.html', context={'form': form})
-    else:
-        return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
 
 def article_update_view(request, pk):
