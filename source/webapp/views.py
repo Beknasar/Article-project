@@ -4,7 +4,7 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from webapp.forms import ArticleForm, BROWSER_DATETIME_FORMAT
 from django.utils.timezone import make_naive
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 
 
 class IndexView(View):
@@ -70,9 +70,17 @@ def article_update_view(request, pk):
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
 
 
-def article_view(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    return render(request, 'article/article_view.html', context={'article': article})
+class ArticleView(TemplateView):
+    template_name = 'article/article_view.html'
+
+    def get_context_data(self, **kwargs):
+        # Получаем контекст от базового класса
+        context = super().get_context_data(**kwargs)
+        # Добавляем свои переменные контекста
+        pk = self.kwargs.get('pk')
+        article = get_object_or_404(Article, pk=pk)
+        context['article'] = article
+        return context
 
 
 def article_delete_view(request, pk):
