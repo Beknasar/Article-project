@@ -4,12 +4,12 @@
   "pk": 2,
   "fields": {
     "title": "Title 2",
-    "text": "Some long informative text 2",
+    "text": "Some long informative text 2.",
     "author": "Name 2",
-    "status": "new",
+    "status": "moderated",
     "created_at": "2024-03-05T08:45:24.116Z",
-    "updated_at": "2024-03-05T08:45:24.116Z",
-    "publish_at": "2024-03-05T08:45:24.116Z"
+    "updated_at": "2024-03-05T08:54:53.657Z",
+    "publish_at": "2024-03-05T08:45:00Z"
   }
 },
 {
@@ -19,9 +19,9 @@
     "title": "New Title",
     "text": "New Text",
     "author": "Name",
-    "status": "new",
+    "status": "moderated",
     "created_at": "2024-03-05T08:46:15.926Z",
-    "updated_at": "2024-03-05T08:46:15.926Z",
+    "updated_at": "2024-03-05T08:54:08.926Z",
     "publish_at": "2024-03-05T08:46:15.926Z"
   }
 },
@@ -32,9 +32,9 @@
     "title": "Title",
     "text": "Another long informative text",
     "author": "Name",
-    "status": "new",
+    "status": "moderated",
     "created_at": "2024-03-05T08:47:09.038Z",
-    "updated_at": "2024-03-05T08:47:09.038Z",
+    "updated_at": "2024-03-05T08:54:15.496Z",
     "publish_at": "2024-03-05T08:45:17.420Z"
   }
 },
@@ -45,10 +45,36 @@
     "title": "Title",
     "text": "Text",
     "author": "Vasya",
-    "status": "new",
+    "status": "moderated",
     "created_at": "2024-03-05T08:50:20.615Z",
-    "updated_at": "2024-03-05T08:50:20.615Z",
+    "updated_at": "2024-03-05T08:54:22.139Z",
     "publish_at": "2024-03-05T08:50:20.615Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 6,
+  "fields": {
+    "title": "Test article 1",
+    "text": "Test text 1",
+    "author": "Bob",
+    "status": "moderated",
+    "created_at": "2024-03-05T08:52:43.292Z",
+    "updated_at": "2024-03-05T09:54:40.545Z",
+    "publish_at": "2024-03-05T08:52:00Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 7,
+  "fields": {
+    "title": "День рождение",
+    "text": "Не знаю даже чего хотеть, чтобы деньги не ушли.",
+    "author": "Unknown",
+    "status": "new",
+    "created_at": "2024-03-05T09:06:03.286Z",
+    "updated_at": "2024-03-05T09:06:03.286Z",
+    "publish_at": "2024-03-05T09:07:00Z"
   }
 },
 {
@@ -82,6 +108,24 @@
     "author": "Kolya",
     "created_at": "2024-03-05T08:50:44.865Z",
     "updated_at": "2024-03-05T08:50:44.865Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$qs8DzWF1GUb56ZFxWsnGNC$LbI7gSl9EABcZihyNH2mGRhLuinbNPJuRDSYWjjqzno=",
+    "last_login": "2024-03-05T08:53:41.860Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-03-05T08:53:32.111Z",
+    "groups": [],
+    "user_permissions": []
   }
 }
 ]
