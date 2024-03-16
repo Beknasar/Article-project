@@ -25,10 +25,12 @@ class ArticleCreateView(CustomFormView):
 
     def form_valid(self, form):
         data = {}
+        tags = form.cleaned_data.pop('tags')
         for key, value in form.cleaned_data.items():
             if value is not None:
                 data[key] = value
         self.article = Article.objects.create(**data)
+        self.article.tags.set(tags)
         return super().form_valid(form)
 
     def get_redirect_url(self):
@@ -49,13 +51,16 @@ class ArticleUpdateView(FormView):
             # Возвращает значение полей, указанных выше у объекта статьи. Например, self.article.title
             initial[key] = getattr(self.article, key)
         initial['publish_at'] = make_naive(self.article.publish_at).strftime(BROWSER_DATETIME_FORMAT)
+        initial['tags'] = self.article.tags.all()
         return initial
 
     def form_valid(self, form):
+        tags = form.cleaned_data.pop('tags')
         for key, value in form.cleaned_data.items():
             if value is not None:
                 # сохраняет новые данные в каждое поле в объекте статьи. Например, self.article.title = title
                 setattr(self.article, key, value)
+        self.article.tags.set(tags)
         self.article.save()
         return super().form_valid(form)
 

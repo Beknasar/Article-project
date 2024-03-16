@@ -1,5 +1,5 @@
 from django import forms
-from .models import STATUS_CHOICES, Article
+from .models import STATUS_CHOICES, Article, Tag
 
 
 BROWSER_DATETIME_FORMAT = "%Y-%m-%dT%H:%M"
@@ -16,6 +16,7 @@ class ArticleForm(forms.Form):
                                                     '%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M',
                                                     '%Y-%m-%d %H:%M:%S'],
                                      widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+    tags = forms.ModelMultipleChoiceField(required=False, label='Теги', queryset=Tag.objects.all())
 
 
 class CommentForm(forms.Form):
