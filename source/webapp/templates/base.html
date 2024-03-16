@@ -15,8 +15,15 @@
             <div class="container">
                 <ul class="menu">
                     <li><a href="{% url 'webapp:index' %}">На главную</a></li>
+                    <li><a href="{% url 'webapp:article_create' %}">Создать статью</a></li>
                     {% block menu %}{% endblock %}
                 </ul>
+            <div class="search-form">
+                <form action="{% url 'webapp:index' %}" method="GET">
+                    <input type="text" name="search">
+                    <input type="submit" value="Поиск">
+                </form>
+            </div>
             </div>
         </nav>
         <div class="container">
