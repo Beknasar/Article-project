@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import STATUS_CHOICES, Article, Tag
 
 
@@ -18,6 +19,26 @@ class ArticleForm(forms.Form):
                                      widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
     tags = forms.ModelMultipleChoiceField(required=False, label='Теги', queryset=Tag.objects.all())
 
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if len(title) < 10:
+            raise ValidationError('Заголовок слишком короткий!')
+        return title
+
+    def clean(self):
+        cleaned_data = super().clean()
+        errors = []
+        text = cleaned_data.get('text')
+        title = cleaned_data.get('title')
+        author = cleaned_data.get('author')
+        if text and title and text == title:
+            errors.append(ValidationError('Текст статьи не должен дублироваться в его заголовке!'))
+        if title and author and title == author:
+            errors.append(ValidationError('Вы не должны писать о себе! Это спам!'))
+        if errors:
+            raise ValidationError(errors)
+        return cleaned_data
+
 
 class CommentForm(forms.Form):
-    article = forms.ModelChoiceField(queryset=Article.objects)
+    article = forms.ModelChoiceField(queryset=Article.objects.all(), required=True, label='Статья')
