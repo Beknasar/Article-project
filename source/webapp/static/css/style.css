@@ -11,7 +11,7 @@ body {
 }
 .navbar {
     display: block;
-    background: #6a7dff;
+    background: #FF9843;
     position: fixed;
     top: 0;
     right: 0;
@@ -78,4 +78,14 @@ body {
 .search-form {
     display: inline-block;
     float: right;
+}
+
+.form-checkboxes {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0 5px 10px;
+}
+
+.form-checkboxes {
+    padding: 3px;
 }
