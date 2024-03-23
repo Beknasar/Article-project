@@ -6,22 +6,23 @@ from django.utils.timezone import make_naive
 from django.views.generic import View, TemplateView, FormView
 from webapp.forms import ArticleForm, BROWSER_DATETIME_FORMAT
 from webapp.models import Article
-from .base_views import FormView as CustomFormView
+from .base_views import FormView as CustomFormView, ListView as CustomListView
 
 
-class IndexView(View):
-    def get(self, request):
-        is_admin = request.GET.get('is_admin', None)
-        if is_admin:
-            data = Article.objects.all()
-        else:
+class IndexView(CustomListView):
+    template_name = 'article/index.html'
+    context_key = 'articles'
+
+    def get_queryset(self):
+        data = Article.objects.all()
+        if not self.request.GET.get('is_admin', None):
             data = Article.objects.filter(status='moderated')
 
         # http://localhost:8000/?search=ygjkjhg
-        search = request.GET.get('search')
+        search = self.request.GET.get('search')
         if search:
             data = data.filter(title__icontains=search)
-        return render(request, 'article/index.html', context={'articles': data})
+        return data
 
 
 class ArticleCreateView(CustomFormView):
