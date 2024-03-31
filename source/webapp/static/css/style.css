@@ -89,3 +89,38 @@ body {
 .form-checkboxes {
     padding: 3px;
 }
+
+.pagination {
+    text-align: center;
+}
+.pagination a, .pagination .page-disabled {
+    display: inline-block;
+    border: solid 1px #D36103;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 3px;
+}
+.pagination a {
+    background: #FF9843;
+    color: white;
+    text-decoration: none;
+}
+.pagination a:hover {
+    background: #DC7A2A;
+    text-decoration: underline;
+}
+.pagination .page-disabled {
+    background: #D36103;
+    color: #dddddd
+}
+.pagination .current-page {
+    display: inline-block;
+}
+.pagination .current-page input {
+    width: 50px;
+    padding: 5px 7px;
+    font-size: inherit;
+    border-radius: 5px;
+    text-align: center;
+    border: solid 1px gray;
+}

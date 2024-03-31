@@ -11,6 +11,8 @@ from .base_views import FormView as CustomFormView, ListView as CustomListView
 class IndexView(ListView):
     template_name = 'article/index.html'
     context_object_name = 'articles'
+    paginate_by = 2
+    paginate_orphans = 1
 
     def get_queryset(self):
         data = Article.objects.all()

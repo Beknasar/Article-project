@@ -2,15 +2,19 @@
 {% block title %}Статьи Бекназара{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Статьи: </h1>
-        {% for article in articles %}
-            <h2>{{ article.title }}</h2>
-            <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
-            <p><a href="{% url 'webapp:article_view' article.pk %}">Подробнее...</a></p>
-            <p><a href="{% url 'webapp:article_update' article.pk %}">Редактировать</a></p>
-            <p><a href="{% url 'webapp:article_delete' article.pk %}">Удалить</a></p>
-            <hr>
-        {% endfor %}
-    </div>
+    <h1>Статьи: </h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+    {% for article in articles %}
+        <h2>{{ article.title }}</h2>
+        <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
+        <p><a href="{% url 'webapp:article_view' article.pk %}">Подробнее...</a></p>
+        <p><a href="{% url 'webapp:article_update' article.pk %}">Редактировать</a></p>
+        <p><a href="{% url 'webapp:article_delete' article.pk %}">Удалить</a></p>
+        <hr>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
