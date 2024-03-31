@@ -21,12 +21,14 @@
                     <li><a href="{% url 'webapp:article_create' %}">Создать статью</a></li>
                     {% block menu %}{% endblock %}
                 </ul>
-            <div class="search-form">
-                <form action="{% url 'webapp:index' %}" method="GET">
-                    <input type="text" name="search">
-                    <input type="submit" value="Поиск">
-                </form>
-            </div>
+{#            <div class="search-form">#}
+{#                <form action="{% url 'webapp:index' %}" method="GET">#}
+{#                    <input type="text" name="search">#}
+{#                    <input type="submit" value="Поиск">#}
+{#                </form>#}
+{#            </div>#}
+            {% block search %}
+            {% endblock %}
             </div>
         </nav>
         <div class="container">

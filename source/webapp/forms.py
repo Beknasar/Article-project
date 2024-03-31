@@ -59,3 +59,7 @@ class ArticleForm(forms.ModelForm):
 
 class CommentForm(forms.Form):
     article = forms.ModelChoiceField(queryset=Article.objects.all(), required=True, label='Статья')
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Найти')

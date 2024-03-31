@@ -2,17 +2,26 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.db.models import Q
 from django.views.generic import TemplateView, FormView, ListView
-from webapp.forms import ArticleForm, BROWSER_DATETIME_FORMAT
+from webapp.forms import ArticleForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
 from webapp.models import Article
 from .base_views import FormView as CustomFormView, ListView as CustomListView
 
 
 class IndexView(ListView):
-    template_name = 'article/index.html'
     context_object_name = 'articles'
+    template_name = 'article/index.html'
     paginate_by = 2
-    paginate_orphans = 1
+    paginate_orphans = 0
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        form = SimpleSearchForm(data=self.request.GET)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            kwargs['search'] = search
+        kwargs['form'] = form
+        return super().get_context_data(object_list=object_list, **kwargs)
 
     def get_queryset(self):
         data = Article.objects.all()
@@ -20,9 +29,11 @@ class IndexView(ListView):
             data = Article.objects.filter(status='moderated')
 
         # http://localhost:8000/?search=ygjkjhg
-        search = self.request.GET.get('search')
-        if search:
-            data = data.filter(title__icontains=search)
+        form = SimpleSearchForm(data=self.request.GET)
+        if form.is_valid():
+            search = self.request.GET.get('search')
+            if search:
+                data = data.filter(Q(title__icontains=search) | Q(author__icontains=search))
         return data.order_by('-created_at')
 
 
