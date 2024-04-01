@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -83,6 +84,8 @@ class ArticleUpdateView(FormView):
 
 class ArticleView(TemplateView):
     template_name = 'article/article_view.html'
+    paginate_comments_by = 2
+    paginate_comments_orphans = 0
 
     def get_context_data(self, **kwargs):
         # Получаем контекст от базового класса
@@ -90,6 +93,20 @@ class ArticleView(TemplateView):
         # Добавляем свои переменные контекста
         pk = self.kwargs.get('pk')
         article = get_object_or_404(Article, pk=pk)
+
+        comments = article.comments.all().order_by('-created_at')
+        if comments.count() > 0:
+            paginator = Paginator(comments, self.paginate_comments_by, orphans=self.paginate_comments_orphans)
+            page_number = self.request.GET.get('page', 1)
+            page = paginator.get_page(page_number)
+
+            context['page_obj'] = page
+            context['is_paginated'] = paginator.num_pages > 1  # page.has_other_pages()
+            context['comments'] = page.object_list
+        else:
+            context['is_paginated'] = False
+            context['comments'] = comments
+
         context['article'] = article
         return context
 

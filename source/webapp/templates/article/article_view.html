@@ -13,7 +13,10 @@
         <p>Теги: {% for tag in article.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
         <h3>Комментарий:</h3>
-        {% for comment in article.comments.all %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+        {% for comment in comments %}
             <div>
                 <h4>{{ comment.author }} ({{ comment.created_at }})</h4>
                 <div class="pre">{{ comment.text }}</div>
@@ -21,5 +24,8 @@
         {% empty %}
             <p>Нет комментариев</p>
         {% endfor %}
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
     </div>
 {% endblock %}
