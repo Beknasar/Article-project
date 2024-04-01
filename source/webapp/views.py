@@ -4,9 +4,9 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
 from django.views.generic import TemplateView, FormView, ListView
-from webapp.forms import ArticleForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
+from webapp.forms import ArticleForm, SimpleSearchForm
 from webapp.models import Article
-from .base_views import FormView as CustomFormView, ListView as CustomListView
+from .base_views import FormView as CustomFormView
 
 
 class IndexView(ListView):
@@ -20,7 +20,6 @@ class IndexView(ListView):
         if form.is_valid():
             search = form.cleaned_data['search']
             kwargs['search'] = search
-        kwargs['form'] = form
         return super().get_context_data(object_list=object_list, **kwargs)
 
     def get_queryset(self):
