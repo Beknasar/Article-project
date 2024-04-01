@@ -5,9 +5,9 @@
     <li><a href="{% url 'webapp:article_delete' article.pk %}">Удалить статью</a></li>
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="box">
         <h2><strong>{{ article.title }}</strong></h2>
-        <p>{{ article.text }}</p>
+        <p class="pre">{{ article.text }}</p>
         <p>От: <em>{{ article.author }} | {{ article.created_at }}</em></p>
         <p>Время публикации: {{ article.publish_at|date:"d.m.Y H:i:s" }}</p>
         <p>Теги: {% for tag in article.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>

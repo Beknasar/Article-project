@@ -7,12 +7,14 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
     {% for article in articles %}
-        <h2>{{ article.title }}</h2>
-        <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
-        <p><a href="{% url 'webapp:article_view' article.pk %}">Подробнее...</a></p>
-        <p><a href="{% url 'webapp:article_update' article.pk %}">Редактировать</a></p>
-        <p><a href="{% url 'webapp:article_delete' article.pk %}">Удалить</a></p>
-        <hr>
+        <div class="box">
+            <h3><a href="{% url 'webapp:article_view' article.pk %}">{{ article.title }}</a></h3>
+            <p>Статус: ({{ article.status }} | {{ article.get_status_display }})</p>
+            <p>{{ article.author }} | {{ article.created_at|date:"d.m.Y H:i:s" }}</p>
+            <p>Время публикации: {{ article.publish_at|date:"d.m.Y H:i:s" }}</p>
+            <p><a href="{% url 'webapp:article_update' article.pk %}">Редактировать</a></p>
+            <p><a href="{% url 'webapp:article_delete' article.pk %}">Удалить</a></p>
+        </div>
     {% endfor %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
